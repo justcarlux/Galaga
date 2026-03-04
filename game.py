@@ -203,9 +203,6 @@ class GalagaGame(GameBase):
 
     def handle_events(self, events):
         for event in events:
-            if event.type == pygame.QUIT:
-                pygame.quit(); sys.exit()
-            
             if event.type == pygame.KEYDOWN:
                 if pygame.K_1 <= event.key <= pygame.K_8:
                     if self.state != "ENTER_NAME":
@@ -230,7 +227,8 @@ class GalagaGame(GameBase):
                         self.cargar_nivel(self.stage)
                         if self.snd_start: self.snd_start.play()
                     elif btn_score.collidepoint(event.pos): self.state = "SCORES"
-                    elif btn_quit.collidepoint(event.pos): pygame.quit(); sys.exit()
+                    elif btn_quit.collidepoint(event.pos):
+                        self.stop()
 
             elif self.state == "SCORES":
                 if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
